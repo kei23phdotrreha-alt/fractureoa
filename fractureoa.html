@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>下肢骨折・変形性疾患と作業療法 | 確認問題集</title>
+<style>
+  :root {
+    --navy-900: #0d1b2e;
+    --navy-800: #14283f;
+    --navy-700: #1b3554;
+    --navy-600: #244469;
+    --navy-100: #e7ecf2;
+    --navy-50:  #f2f5f8;
+    --gold-700: #8a6d10;
+    --gold-600: #b4900f;
+    --gold-500: #c9a227;
+    --gold-100: #faf2d9;
+    --gold-50:  #fdf9ec;
+    --ink:       #1c1f24;
+    --ink-soft:  #565b62;
+    --ink-mute:  #8b9099;
+    --line:      #e2e5ea;
+    --line-strong: #ccd1d9;
+    --page-bg:   #f1f2f5;
+    --card-bg:   #ffffff;
+    --ok-bg:     #e8f3e4;
+    --ok-line:   #5e9050;
+    --ok-text:   #2c5c22;
+    --bad-bg:    #fbe9e8;
+    --bad-line:  #c4564f;
+    --bad-text:  #8c2c26;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Noto Sans JP", -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--page-bg);
+    color: var(--ink);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; padding-bottom: 64px; }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    background: linear-gradient(135deg, var(--navy-800) 0%, var(--navy-700) 100%);
+    color: #fff;
+    padding: 28px 20px 22px;
+    position: relative;
+  }
+  .masthead::after {
+    content: "";
+    position: absolute; left: 0; right: 0; bottom: 0; height: 4px;
+    background: linear-gradient(90deg, var(--gold-500), #e0c25a, var(--gold-500));
+  }
+  .masthead .kicker {
+    font-size: 12px; letter-spacing: 0.08em; color: #d9c98a; font-weight: 600;
+    margin: 0 0 8px; text-transform: uppercase;
+  }
+  .masthead h1 { font-size: 21px; font-weight: 700; margin: 0 0 6px; letter-spacing: 0.01em; }
+  .masthead p.desc { font-size: 13px; color: #c3cee0; margin: 0; }
+
+  .content { padding: 18px 16px 0; }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 1px 3px rgba(13,27,46,0.06);
+    overflow: hidden;
+  }
+  .card-body { padding: 22px 20px 24px; }
+
+  /* ---------- Icons ---------- */
+  .ico { width: 20px; height: 20px; flex: 0 0 auto; }
+  .ico-sm { width: 16px; height: 16px; }
+
+  /* ---------- Home screen ---------- */
+  .home-intro { font-size: 13.5px; color: var(--ink-soft); margin: 0 0 18px; }
+  .home-stats {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px;
+    margin-bottom: 22px;
+  }
+  .home-stats .stat-card { background: var(--navy-50); border-radius: var(--radius-md); padding: 13px 8px; text-align: center; }
+  .home-stats .s-cat { font-size: 10.5px; color: var(--ink-soft); font-weight: 700; margin: 0 0 5px; }
+  .home-stats .s-val { font-size: 18px; font-weight: 800; color: var(--navy-700); margin: 0; }
+  .home-stats .s-val.weak-val { color: var(--bad-text); }
+
+  .mode-card {
+    display: flex; align-items: center; gap: 14px; width: 100%;
+    text-align: left; padding: 16px 16px; margin-bottom: 12px;
+    border: 1.5px solid var(--line-strong); border-radius: var(--radius-md);
+    background: #fff; cursor: pointer; font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .mode-card:hover:not(:disabled) { border-color: var(--navy-600); background: var(--navy-50); }
+  .mode-card:disabled { opacity: 0.45; cursor: not-allowed; }
+  .mode-card .mc-icon-wrap {
+    flex: 0 0 auto; width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--navy-100); color: var(--navy-700);
+  }
+  .mode-card.is-gold .mc-icon-wrap { background: var(--gold-100); color: var(--gold-700); }
+  .mode-card .mc-text { flex: 1 1 auto; }
+  .mode-card .mc-title { font-size: 15px; font-weight: 700; color: var(--ink); margin: 0 0 3px; }
+  .mode-card .mc-sub { font-size: 12.5px; color: var(--ink-mute); margin: 0; }
+
+  .link-row { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line); }
+  .link-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: none; border: none; font-family: inherit; font-size: 13px;
+    color: var(--navy-700); font-weight: 700; cursor: pointer; padding: 4px 0;
+  }
+  .link-btn:disabled { color: var(--ink-mute); cursor: not-allowed; }
+  .link-btn.danger { color: var(--bad-text); }
+
+  /* ---------- Quiz header row ---------- */
+  .quiz-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 10px; flex-wrap: wrap; }
+  .qnum { font-size: 13px; color: var(--ink-mute); font-weight: 600; white-space: nowrap; }
+  .mode-flag {
+    font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 100px;
+    background: var(--gold-100); color: var(--gold-700); white-space: nowrap;
+  }
+  .catbadge { font-size: 11px; font-weight: 700; padding: 5px 11px; border-radius: 100px; letter-spacing: 0.02em; white-space: nowrap; }
+  .catbadge.cat-1 { background: var(--navy-100); color: var(--navy-700); }
+  .catbadge.cat-2 { background: #e3eef3; color: #1d5b6e; }
+  .catbadge.cat-3 { background: var(--gold-100); color: var(--gold-700); }
+
+  .progress-track { height: 5px; background: var(--navy-50); border-radius: 100px; overflow: hidden; margin-bottom: 20px; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--navy-600), var(--navy-700)); border-radius: 100px; transition: width 0.25s ease; }
+  .progress-fill.is-weak { background: linear-gradient(90deg, var(--gold-600), var(--gold-500)); }
+
+  .question-text { font-size: 16.5px; font-weight: 700; color: var(--ink); line-height: 1.65; margin: 0 0 18px; }
+
+  .choices { display: flex; flex-direction: column; gap: 10px; }
+  .choice-btn {
+    display: flex; align-items: flex-start; gap: 12px; text-align: left; width: 100%;
+    padding: 13px 15px; font-size: 14.5px; line-height: 1.55;
+    border: 1.5px solid var(--line-strong); border-radius: var(--radius-md);
+    background: var(--card-bg); color: var(--ink); cursor: pointer; font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .choice-btn:hover:not(:disabled) { border-color: var(--navy-600); background: var(--navy-50); }
+  .choice-btn:disabled { cursor: default; }
+  .choice-btn .opt-label {
+    flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%;
+    background: var(--navy-100); color: var(--navy-700); font-weight: 700; font-size: 12.5px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .choice-btn .opt-text { flex: 1 1 auto; padding-top: 2px; }
+  .choice-correct { border-color: var(--ok-line) !important; background: var(--ok-bg) !important; }
+  .choice-correct .opt-label { background: var(--ok-line); color: #fff; }
+  .choice-correct .opt-text { color: var(--ok-text); font-weight: 700; }
+  .choice-wrong { border-color: var(--bad-line) !important; background: var(--bad-bg) !important; }
+  .choice-wrong .opt-label { background: var(--bad-line); color: #fff; }
+  .choice-wrong .opt-text { color: var(--bad-text); font-weight: 700; }
+
+  .explanation { margin-top: 16px; padding: 14px 16px; border-radius: var(--radius-md); border-left: 4px solid var(--navy-600); background: var(--navy-50); }
+  .explanation.is-wrong { border-left-color: var(--bad-line); background: #fdf4f3; }
+  .result-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; margin: 0 0 8px; padding: 3px 10px; border-radius: 100px; }
+  .result-tag.ok { background: var(--ok-line); color: #fff; }
+  .result-tag.bad { background: var(--bad-line); color: #fff; }
+  .explanation p.exp-text { font-size: 13.5px; color: var(--ink-soft); margin: 0; line-height: 1.65; }
+
+  .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .btn { font-family: inherit; font-size: 14px; font-weight: 700; padding: 11px 18px; border-radius: var(--radius-sm); cursor: pointer; border: 1.5px solid transparent; -webkit-tap-highlight-color: transparent; }
+  .btn-ghost { background: #fff; border-color: var(--line-strong); color: var(--ink-soft); }
+  .btn-ghost:hover:not(:disabled) { border-color: var(--navy-600); color: var(--navy-700); }
+  .btn-ghost:disabled { opacity: 0.35; cursor: default; }
+  .btn-primary { background: var(--navy-700); color: #fff; }
+  .btn-primary:hover { background: var(--navy-800); }
+  .score-mini { font-size: 12.5px; color: var(--ink-mute); font-weight: 600; white-space: nowrap; }
+
+  /* ---------- Result screen ---------- */
+  .result-hero {
+    background: linear-gradient(135deg, var(--navy-800), var(--navy-700));
+    color: #fff; padding: 30px 24px 26px; text-align: center;
+    margin: -22px -20px 0; position: relative;
+  }
+  .result-hero::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: linear-gradient(90deg, var(--gold-500), #e0c25a, var(--gold-500)); }
+  .result-hero .r-label { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #d9c98a; font-weight: 700; margin: 0 0 10px; }
+  .result-hero .r-score { font-size: 46px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+  .result-hero .r-score span { font-size: 22px; color: #b9c4d6; font-weight: 600; }
+  .result-hero .r-msg { font-size: 14px; color: #d6dee9; margin: 10px 0 0; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; padding: 20px 20px 4px; }
+  .stat-card { background: var(--navy-50); border-radius: var(--radius-md); padding: 13px 8px; text-align: center; }
+  .stat-card .s-cat { font-size: 10.5px; color: var(--ink-soft); font-weight: 700; margin: 0 0 5px; line-height: 1.4; }
+  .stat-card .s-val { font-size: 18px; font-weight: 800; color: var(--navy-700); margin: 0; }
+
+  .weak-note {
+    margin: 16px 20px 0; padding: 12px 14px; border-radius: var(--radius-md);
+    background: var(--gold-50); border: 1px solid var(--gold-100);
+    font-size: 12.5px; color: var(--gold-700); display: flex; align-items: center; gap: 10px;
+  }
+
+  .action-row { display: flex; gap: 10px; padding: 16px 20px 8px; flex-wrap: wrap; }
+  .action-row .btn { flex: 1 1 auto; text-align: center; min-width: 140px; }
+  .home-link-row { padding: 4px 20px 20px; text-align: center; }
+
+  .review-list { padding: 0 20px 22px; display: flex; flex-direction: column; gap: 12px; }
+  .review-item { border: 1px solid var(--line); border-left: 4px solid var(--gold-500); border-radius: var(--radius-md); padding: 14px 16px; background: #fff; }
+  .review-item .ri-cat { font-size: 11px; color: var(--ink-mute); font-weight: 700; margin: 0 0 6px; display: flex; justify-content: space-between; gap: 8px; }
+  .review-item .ri-q { font-size: 14px; font-weight: 700; margin: 0 0 8px; line-height: 1.55; }
+  .review-item .ri-ans { font-size: 12.5px; color: var(--ok-text); font-weight: 700; margin: 0 0 5px; }
+  .review-item .ri-exp { font-size: 12.5px; color: var(--ink-soft); margin: 0; line-height: 1.6; display: none; }
+  .review-item .ri-exp.is-open { display: block; }
+  .review-item .ri-toggle { background: none; border: none; font-family: inherit; font-size: 12px; color: var(--navy-700); font-weight: 700; cursor: pointer; padding: 4px 0 0; }
+  .review-item .ri-miss { font-size: 11px; color: var(--bad-text); font-weight: 700; white-space: nowrap; }
+  .empty-note { font-size: 13.5px; color: var(--ink-soft); text-align: center; padding: 12px 0; }
+
+  /* ---------- Weak list screen ---------- */
+  .wl-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .wl-header h2 { font-size: 16px; font-weight: 700; margin: 0; color: var(--ink); }
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; background: none; border: none; font-family: inherit; font-size: 13px; color: var(--navy-700); font-weight: 700; cursor: pointer; padding: 4px 0; }
+
+  @media (max-width: 480px) {
+    .masthead { padding: 22px 16px 18px; }
+    .masthead h1 { font-size: 18px; }
+    .card-body { padding: 18px 14px 20px; }
+    .question-text { font-size: 15.5px; }
+    .choice-btn { padding: 12px 13px; font-size: 14px; }
+    .result-hero { margin: -18px -14px 0; padding: 26px 18px 22px; }
+    .result-hero .r-score { font-size: 38px; }
+    .stat-grid, .home-stats { grid-template-columns: repeat(3, minmax(0,1fr)); gap: 8px; }
+    .stat-grid { padding: 16px 14px 4px; }
+    .action-row { padding: 14px 14px 6px; }
+    .review-list { padding: 0 14px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <p class="kicker">作業療法学 確認テスト</p>
+    <h1>下肢骨折・変形性疾患と作業療法</h1>
+    <p class="desc">第11回・第12回 講義内容 確認問題集（全60問）</p>
+  </header>
+  <div class="content">
+    <div class="card">
+      <div class="card-body" id="app"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   アイコン（簡易インラインSVG／外部依存なし）
+   ========================================================= */
+const ICONS = {
+  play: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"></polygon></svg>',
+  target: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"></circle></svg>',
+  list: '<svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="20" y2="6"></line><line x1="8" y1="12" x2="20" y2="12"></line><line x1="8" y1="18" x2="20" y2="18"></line><circle cx="4" cy="6" r="1.2" fill="currentColor" stroke="none"></circle><circle cx="4" cy="12" r="1.2" fill="currentColor" stroke="none"></circle><circle cx="4" cy="18" r="1.2" fill="currentColor" stroke="none"></circle></svg>',
+  refresh: '<svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.5 15a9 9 0 1 0 2-9.5L1 10"></path></svg>',
+  back: '<svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>',
+  trash: '<svg class="ico ico-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>'
+};
+
+/* =========================================================
+   問題データ（id, cat, q, choices, ans, exp）
+   ========================================================= */
+const QUESTIONS = [
+{id:"h01",cat:"第11回",q:"大腿骨頸部骨折の特徴として正しいものはどれか。",choices:["関節外骨折であり仮骨が形成される","関節内骨折であり骨膜を欠くため仮骨が形成されない","出血量が多く大腿部に腫脹をきたしやすい","骨頭への血行は良好に保たれる"],ans:1,exp:"頸部骨折は関節内骨折で関節包内に骨膜を欠くため仮骨形成がされず、出血量も少ない。内側大腿回旋動脈の分枝が損傷されやすく骨頭血行は不良となる。"},
+{id:"h02",cat:"第11回",q:"大腿骨転子部骨折で正しいものはどれか。",choices:["関節内骨折である","骨頭への血流は損傷されやすい","関節外骨折で骨膜が存在し仮骨形成される","出血量は少なく腫脹は目立たない"],ans:2,exp:"転子部骨折は関節外骨折で骨膜が存在するため仮骨が形成され、骨癒合は比較的良好。海綿骨の血流が豊富で出血量が多く、大腿部の腫脹・皮下出血をきたしやすい。"},
+{id:"h03",cat:"第11回",q:"大腿骨頸部骨折で骨頭への血行を担う主な血管はどれか。",choices:["大腿深動脈","内側大腿回旋動脈の分枝","外側大腿回旋動脈の分枝","閉鎖動脈"],ans:1,exp:"大腿骨頭は主に内側大腿回旋動脈の分枝によって栄養されており、頸部骨折ではこの血管が損傷されやすく骨頭壊死のリスクとなる。"},
+{id:"h04",cat:"第11回",q:"大腿骨近位部骨折の受傷原因として最も多いものはどれか。",choices:["交通事故","立った位置からの転倒","階段・段差の踏み外し","寝ていて・体を捻って"],ans:1,exp:"スライドのデータでは「立った位置からの転倒」が71%と最多であり、高齢者の日常生活内での転倒が主要因である。"},
+{id:"h05",cat:"第11回",q:"大腿骨近位部骨折の好発年齢はどの年代か。",choices:["65〜69歳","75〜79歳","85〜89歳","95〜99歳"],ans:2,exp:"85〜89歳が発生のピークであり、女性：男性＝3:1と女性に多い。"},
+{id:"h06",cat:"第11回",q:"大腿骨近位部骨折診療ガイドラインで推奨される受傷から手術までの時間はどれか。",choices:["24時間以内","48時間以内","72時間以内","1週間以内"],ans:1,exp:"受傷から手術まで48時間以内が推奨されており、2022年度診療報酬でも48時間以内の手術に加算（+4,000点）が設けられている。待機が長いほどDVTや合併症リスクが上昇する。"},
+{id:"h07",cat:"第11回",q:"大腿骨近位部骨折後1年の死亡率はおおよそどの程度か。",choices:["約1〜5%","約10〜30%","約50〜70%","約80%以上"],ans:1,exp:"1年死亡率は約10〜30%とされ、5年生存率は約50%。骨折前の歩行能力が高いほど予後（回復率）も良好である。"},
+{id:"h08",cat:"第11回",q:"Garden分類はどのような基準で骨折を分類するか。",choices:["骨折線の位置と骨膜の有無","転位の程度と骨頭の回旋の有無","受傷からの経過時間","手術アプローチの違い"],ans:1,exp:"Garden分類は骨折の転位（ずれ）の程度と骨頭の回旋の有無を基準に4ステージに分類する大腿骨頸部骨折の分類法である。"},
+{id:"h09",cat:"第11回",q:"Garden分類Stage IVの病態として正しいものはどれか。",choices:["不完全骨折で骨頭への血流が残存している","完全骨折だが転位はみられない","完全骨折・部分転位で骨頭への血流が減少している","完全骨折・高度転位で骨頭への血流が途絶している"],ans:3,exp:"Stage IVは完全骨折で骨頭が骨折部から完全にずれており、骨頭への血流が途絶している状態。骨頭の安定性が最も低く、高齢者ではBHAが第一選択となる。"},
+{id:"h10",cat:"第11回",q:"Garden分類Stage I・IIの大腿骨頸部骨折に対する第一選択の治療方針はどれか。",choices:["人工骨頭置換術（BHA）","人工股関節全置換術（THA）","観血的整復内固定術（ORIF）","保存療法（牽引のみ）"],ans:2,exp:"Stage I・IIは非転位型で安定性が高く血行が保たれていることが多いため、ORIF（Hanssonピン・CCS・SHS等）が第一選択となる。"},
+{id:"h11",cat:"第11回",q:"Garden Stage III・IVで骨接合術を選択した場合に特に注意すべき合併症はどれか。",choices:["変形癒合（内反）","骨頭壊死（無菌性壊死）","総腓骨神経麻痺","深部静脈血栓症のみ"],ans:1,exp:"Stage III・IVは骨頭への血流が減少・途絶しているため、骨接合術を選択した場合でも骨頭壊死（Legg-Calvé-Perthes様の無菌性壊死）のリスクが高く、術後の経過観察が必要である。"},
+{id:"h12",cat:"第11回",q:"Evans分類はどの骨折の分類に用いられるか。",choices:["大腿骨頸部骨折","大腿骨転子部骨折","大腿骨頸基部骨折","大腿骨骨幹部骨折"],ans:1,exp:"Evans分類は大腿骨転子部骨折を骨折線の状態・安定性によりType1（Group1〜4）とType2（逆斜骨折）に分類するものである。"},
+{id:"h13",cat:"第11回",q:"Evans分類で不安定型に分類され、2021年ガイドラインで髄内釘が推奨されるのはどれか。",choices:["Type1 Group1（転位なし）","Type1 Group2（転位あり・整復可能）","Type1 Group3（大転子から骨折線が分岐）","いずれも安定型でプレート固定が推奨される"],ans:2,exp:"Group3（整復不能・不安定）、Group4（粉砕骨折）、Type2（逆斜骨折）は不安定型に分類され、2021年ガイドラインでは髄内釘が推奨されている。髄内釘はSHSより力学的に有利である。"},
+{id:"h14",cat:"第11回",q:"大腿骨転子部骨折の安定型（Evans Group1,2）の特徴として正しいものはどれか。",choices:["小転子に大きな骨片があり整復不能","荷重が加わると骨折部が不安定化しやすい","小転子に大きな骨片がなく荷重が加わっても骨折部が安定しやすい","逆斜位の骨折線を有する"],ans:2,exp:"安定型は小転子に大きな骨片がなく、荷重が加わっても骨折部が安定しやすい特徴を持ち、ORIF（プレート・スクリュー固定）が適応となる。"},
+{id:"h15",cat:"第11回",q:"ORIF（観血的整復内固定術）の説明として正しいものはどれか。",choices:["骨頭を人工物に置き換える手術","骨折部を直接見て整復し、プレートやネジで内側から固定する手術","関節包外で牽引のみを行う保存療法","寛骨臼側も人工物に置換する手術"],ans:1,exp:"ORIF（Open Reduction and Internal Fixation）は外科的に骨折部を開放し直視下で整復（観血的）、プレートやネジなどの金属製器具で内固定する手術である。"},
+{id:"h16",cat:"第11回",q:"大腿骨頸部骨折のORIFで用いられる術式に該当しないものはどれか。",choices:["Hanssonピン","cannulated cancellous screw（CCS）","sliding hip screw（SHS）","髄内釘"],ans:3,exp:"髄内釘は主に大腿骨転子部骨折（特に不安定型）に用いられる。頸部骨折のORIFにはHanssonピン、CCS、SHSが用いられる。"},
+{id:"h17",cat:"第11回",q:"大腿骨転子部骨折の不安定型に対し、SHSより力学的に有利とされる固定方法はどれか。",choices:["髄内釘","Hanssonピン","cannulated cancellous screw","創外固定"],ans:0,exp:"髄内釘は大転子先端から髄腔内に釘を打ち込むため、SHS（サイドプレート型）よりも力学的に有利であり、不安定型転子部骨折に推奨される。"},
+{id:"h18",cat:"第11回",q:"BHA（人工骨頭置換術）の説明として正しいものはどれか。",choices:["骨折した大腿骨頭と寛骨臼の両方を人工物に置換する","骨折した大腿骨頭のみを人工物に置換する","骨切り術により荷重線を変更する","プレートとスクリューで内固定のみを行う"],ans:1,exp:"BHA（Bipolar Hip Arthroplasty）は骨折した大腿骨頭のみを人工物に置き換える手術であり、骨が大きくずれた複雑な頸部骨折に対し早期から荷重歩行が可能になる。"},
+{id:"h19",cat:"第11回",q:"THA（人工股関節全置換術）がBHAと比べて選択されやすいのはどのような患者か。",choices:["高齢で全身状態不良の低活動例","活動性が高く変形性股関節症を合併する例","認知機能が著しく低下している例","早期の荷重開始を最優先したい例"],ans:1,exp:"THAは寛骨臼側も人工物に置換するため長期的な安定性に優れ、活動性が高い例や変形性股関節症合併例に適する。BHAは寛骨臼軟骨の摩耗リスクがあり活動性の高い例では不利になりやすい。"},
+{id:"h20",cat:"第11回",q:"BHAとTHAの脱臼率に関する記述で正しいものはどれか。",choices:["BHAの脱臼率は0%に近く問題にならない","BHA後方アプローチの脱臼率は平均約3%程度との報告がある","THAは脱臼することがない","脱臼率はアプローチに関係しない"],ans:1,exp:"BHA後方アプローチの脱臼率は約1.5〜13.4%（平均3%程度）とされ、近年はTHAとの有意差がないとする報告も増えている。"},
+{id:"h21",cat:"第11回",q:"人工関節置換術における後方アプローチ（PA）での脱臼肢位はどれか。",choices:["伸展＋内転＋外旋","屈曲＋内転＋内旋","伸展＋外転＋内旋","屈曲＋外転＋外旋"],ans:1,exp:"後方（PA）・後側方（PLA）アプローチでは「屈曲＋内転＋内旋」が脱臼肢位（禁忌肢位）であり、低い椅子への深い前傾やしゃがみ、内股姿勢が危険となる。"},
+{id:"h22",cat:"第11回",q:"前方アプローチ（DAA）における脱臼肢位はどれか。",choices:["屈曲＋内転＋内旋","伸展＋内転＋外旋","屈曲＋外転＋外旋","伸展＋外転＋内旋"],ans:1,exp:"前方（DAA）・前側方（ALS/OCM）アプローチでは「伸展＋内転＋外旋」が脱臼肢位であり、腰掛け時の過伸展や和式動作（正座等）に注意が必要。"},
+{id:"h23",cat:"第11回",q:"後方アプローチ術後の患者に対するトイレ動作指導として適切なものはどれか。",choices:["和式トイレを推奨し深くしゃがませる","補高便座を使用し股関節の深い屈曲・内旋・内転を回避させる","股関節を外転位に保つ必要はない","便座の高さは問わない"],ans:1,exp:"後方アプローチでは屈曲＋内転＋内旋が禁忌肢位のため、補高便座を用いて股関節の深屈曲（90°超）・内旋・内転を避けるよう指導する。"},
+{id:"h24",cat:"第11回",q:"股関節術後の靴下着脱に用いる自助具として適切なものはどれか。",choices:["万能カフ","ボタンエイド","ソックスエイド","書字補助具"],ans:2,exp:"ソックスエイドは股関節の深屈曲を避けて靴下を着脱できる自助具で、脱臼予防のADL指導において重要な選択肢である。"},
+{id:"h25",cat:"第11回",q:"床の物を拾う、靴・下着の操作に用いる自助具として適切なものはどれか。",choices:["リーチャー","ボタンエイド","食事用自助具","シャワーチェア"],ans:0,exp:"リーチャーは深い前屈や股関節屈曲を避けながら床の物を拾ったり、靴・下着を操作するために用いる。"},
+{id:"h26",cat:"第11回",q:"外側アプローチ（DLA）の脱臼肢位として正しいものはどれか。",choices:["伸展＋内転＋外旋","屈曲＋内転＋外旋","屈曲＋外転＋内旋","伸展＋内転＋内旋"],ans:1,exp:"外側（DLA）アプローチでは「屈曲＋内転＋外旋」が脱臼肢位であり、深い屈曲・内股・外旋の複合を避ける必要がある。再置換術でも多用される。"},
+{id:"h27",cat:"第11回",q:"セメントレス型人工股関節の術後荷重指示としておおよそ正しいものはどれか。",choices:["術直後から全荷重可能","部分荷重（20〜30%体重）程度から開始","完全免荷を3ヶ月継続","荷重制限は不要"],ans:1,exp:"セメント固定型は術直後から全荷重可能だが、セメントレス型では部分荷重（20〜30%体重）から開始することが多い。加重指示は必ず整形外科医に確認する。"},
+{id:"h28",cat:"第11回",q:"術後急性期のDVT（深部静脈血栓症）予防として適切な介入はどれか。",choices:["足関節背屈運動と弾性ストッキング着用","完全な患肢安静の継続","水分摂取制限","早期離床の禁止"],ans:0,exp:"DVT予防には足関節背屈運動、弾性ストッキング着用、早期離床（術後1日以内）が重要であり、受傷後48時間以上の待機でDVT発生率が上昇する。"},
+{id:"h29",cat:"第11回",q:"認知機能が低下した患者への脱臼予防指導で推奨される組み合わせはどれか。",choices:["反復練習のみで十分","視覚的指示ツールのみで十分","反復練習＋視覚的指示ツール＋家族指導の3点セット","家族指導のみに限定する"],ans:2,exp:"認知機能低下例には反復練習＋視覚的指示ツール（禁忌肢位イラスト）＋家族指導を組み合わせることで、理解度・記憶定着を高める工夫が重要である。"},
+{id:"h30",cat:"第11回",q:"術前評価でOTが確認すべき項目として最も術後ADL回復予測に相関するとされるのはどれか。",choices:["手術アプローチの種類のみ","受傷前のADL自立度と認知機能","家族の職業","入院病棟の階数"],ans:1,exp:"受傷前のADL自立度と認知機能が術後のADL回復予測に最も相関するとされ、術前評価で重視すべき項目である。"},
+{id:"h31",cat:"第11回",q:"大腿骨近位部骨折患者における反対側（二次）骨折のリスクはどの程度とされるか。",choices:["一般高齢者と同程度","一般高齢者の約1.5倍","一般高齢者の約3〜5倍","一般高齢者の約10倍以上"],ans:2,exp:"大腿骨近位部骨折患者の反対側骨折リスクは一般高齢者の3〜5倍とされ、「Fix and Treat」の考え方で骨折治療と骨粗鬆症治療を同時に行うことが二次骨折予防に重要である。"},
+{id:"h32",cat:"第11回",q:"回復期（術後2週〜3ヶ月）のリハビリで是正を目指す代表的な歩行異常はどれか。",choices:["分回し歩行","Trendelenburg歩行","小刻み歩行","はさみ脚歩行"],ans:1,exp:"中殿筋筋力低下に伴うTrendelenburg歩行（術側立脚時に骨盤が反対側へ傾く）の是正を目指し、中殿筋強化や片脚立位練習が行われる。"},
+{id:"k01",cat:"第12回",q:"変形性膝関節症の定義として正しいものはどれか。",choices:["炎症性疾患であり自己免疫が関与する","膝関節軟骨の変性・摩耗と骨硬化・骨増殖を伴う非炎症性退行性疾患","外傷後にのみ生じる疾患","小児期に好発する疾患"],ans:1,exp:"変形性膝関節症は膝関節軟骨の変性・摩耗に続いて軟骨下骨の骨硬化・骨増殖性変化が生じる非炎症性の退行性疾患である。"},
+{id:"k02",cat:"第12回",q:"日本における変形性膝関節症（X線所見KL≧2）の40歳以上有病率について正しいものはどれか。",choices:["男性に多く女性の約2倍である","女性の方が高く男性42%・女性61.5%程度である","男女差はほとんどない","有病率は10%未満と少ない"],ans:1,exp:"ROAD studyによると40歳以上の有病率は男性42%・女性61.5%で、推計2,530万人以上とされる。一次性は60歳以上の女性に特に多い。"},
+{id:"k03",cat:"第12回",q:"変形性膝関節症患者の要介護への移行リスクについて正しいものはどれか。",choices:["一般高齢者とほぼ同じ","一般高齢者の約6倍高い","一般高齢者よりむしろ低い","データは存在しない"],ans:1,exp:"診療ガイドライン2023によれば、変形性膝関節症患者の要介護への移行リスクは一般高齢者の約6倍高いとされている。"},
+{id:"k04",cat:"第12回",q:"変形性膝関節症患者における抑うつ傾向（SDS≧40）の割合はおおよそどの程度か。",choices:["約10%","約25%","約半数","ほぼ全例"],ans:2,exp:"約半数の膝OA患者でSDS（抑うつ尺度）≥40の傾向がみられ、「痛みで外出できない→孤立→うつ」という悪循環を断つための心理社会的支援が重要である。"},
+{id:"k05",cat:"第12回",q:"変形性膝関節症の発症メカニズムにおいて、最初の段階として説明されているものはどれか。",choices:["軟骨下骨の骨折","半月板損傷による関節面からの逸脱","靭帯の断裂","滑膜の腫瘍化"],ans:1,exp:"加齢により脆弱化した半月板が小さな外力でも損傷し関節面から逸脱することで軟骨への負荷が増大し、変形性膝関節症が進行していくメカニズムが説明されている。"},
+{id:"k06",cat:"第12回",q:"膝関節の脛骨荷重面の構造的特徴として正しいものはどれか。",choices:["外側に傾いており外側に荷重がかかりやすい","内側に傾いており内側関節面に体重がかかりやすい","左右均等で偏りはない","前方に傾いている"],ans:1,exp:"脛骨の荷重面は内側に傾いており、内側関節面に体重がかかりやすい構造になっているため、変形性膝関節症では内側型が多くなる。"},
+{id:"k07",cat:"第12回",q:"半月板・関節軟骨の再生能力について正しいものはどれか。",choices:["どちらも自然に再生・治癒する","半月板は再生するが軟骨は再生しない","軟骨は再生するが半月板は再生しない","半月板・軟骨はともに自然治癒も再生もしない"],ans:3,exp:"スライドで強調されている通り、半月板・軟骨はともに自然治癒も再生もしない組織であり、損傷すると進行性に変性していく。"},
+{id:"k08",cat:"第12回",q:"変形性膝関節症で関節に水がたまる（関節水腫）機序として正しいものはどれか。",choices:["軟骨が水分を吸収するため","炎症を起こした滑膜が関節液を過剰産生し、産生が吸収を上回るため","半月板が水分を放出するため","骨が水分を吸収できなくなるため"],ans:1,exp:"炎症を起こした滑膜が防御反応として関節液を過剰に産生し、滑膜の血管・リンパ管の透過性変化により吸収能力も低下するため、産生が吸収を上回り腫脹（水腫）が生じる。"},
+{id:"k09",cat:"第12回",q:"Kellgren-Lawrence（KL）分類でX線上「明確な骨棘があり裂隙狭小化がわずかな初期段階」はどれか。",choices:["Grade 0","Grade 1","Grade 2","Grade 4"],ans:2,exp:"Grade 2は明確な骨棘がみられ関節裂隙の狭小化がわずかな初期段階であり、KL2以上が疫学研究上「変形性膝関節症あり」と定義される。"},
+{id:"k10",cat:"第12回",q:"Kellgren-Lawrence分類Grade 4の特徴として正しいものはどれか。",choices:["骨棘なし・関節裂隙正常","骨棘疑いのみで要観察","大型骨棘・骨変形があり関節裂隙が消失し骨接触がみられる末期","中等度骨棘で裂隙狭小化が明確な進行期"],ans:2,exp:"Grade 4は大型骨棘・骨変形を伴い関節裂隙が消失し骨同士が接触する末期の状態であり、日常生活制限が大きく手術が考慮される。"},
+{id:"k11",cat:"第12回",q:"変形性膝関節症の保存療法が主に対象とするKL分類の範囲はどれか。",choices:["Grade 0のみ","KL1〜3","KL4のみ","全グレード共通で手術が優先される"],ans:1,exp:"保存療法はKL1〜3が主な対象となり、KL4で日常生活制限が大きい場合には手術が考慮される。"},
+{id:"k12",cat:"第12回",q:"高位脛骨骨切り術（HTO）の主な目的として正しいものはどれか。",choices:["膝関節を人工物で完全に置換する","荷重線を外側にシフトして内側への負荷を分散する","半月板を切除して炎症を抑える","関節を固定し可動性を完全に失わせる"],ans:1,exp:"HTOは脛骨をカットして荷重線を膝関節の外側へ通すように矯正することで、内側関節面への負荷を分散させる手術であり、比較的若年・活動性の高い例に適応される。"},
+{id:"k13",cat:"第12回",q:"UKA（人工膝関節部分置換術）の特徴として正しいものはどれか。",choices:["骨表面全部を人工物に置換する","内側または外側など傷んだ1区画のみを置換し他の区画・靭帯は温存する","骨切りにより脚の形状のみを矯正する","関節鏡視下に半月板のみを切除する"],ans:1,exp:"UKAは傷んだ1区画（内側または外側）のみを置換し、他の区画や靭帯を温存する手術で、早期回復・骨温存の利点がある。"},
+{id:"k14",cat:"第12回",q:"TKA（人工膝関節全置換術）の主な適応として正しいものはどれか。",choices:["KL1の初期で症状の原因が明確な場合","KL3〜4で保存療法が無効で日常生活が著しく制限された例","軟骨損傷のみで骨変形のない例","若年で活動性の高い軽症例"],ans:1,exp:"TKAは骨表面全部を置換する手術であり、KL3〜4で保存療法が無効、日常生活が著しく制限された例に適応となる。最も確実な疼痛緩和が得られる。"},
+{id:"k15",cat:"第12回",q:"関節鏡視下手術が適している病期・状態はどれか。",choices:["KL4の末期で骨接触がある状態","KL1〜2の初期で痛みの原因が主に軟骨・半月板損傷である場合","関節変形が著明で靭帯不安定性がある場合","TKA後の再置換が必要な場合"],ans:1,exp:"関節鏡視下手術は内視鏡で傷ついた軟骨や半月板断片を取り除き、炎症滑膜を切除する手術で、変形性膝関節症の初期段階（KL1〜2）で痛みの原因が明確な場合に適している。"},
+{id:"k16",cat:"第12回",q:"体重1kg減少による膝関節への荷重軽減効果としてスライドで示されている数値はどれか。",choices:["約1kg軽減","約2kg軽減","約4kg軽減","約10kg軽減"],ans:2,exp:"体重1kg減少で膝への負荷は約4kg軽減するとされ、歩行時は体重の約4倍の力が膝にかかることが根拠となっている。患者教育における体重コントロール指導の重要な数値である。"},
+{id:"k17",cat:"第12回",q:"変形性膝関節症の運動療法で特に重視される筋はどれか。",choices:["上腕二頭筋と三角筋","大腿四頭筋と中殿筋","僧帽筋と広背筋","前脛骨筋のみ"],ans:1,exp:"膝関節を支える大腿四頭筋と、骨盤の安定性に関わる中殿筋の強化が、膝関節の安定性向上と負担軽減のために重視される。"},
+{id:"k18",cat:"第12回",q:"足底板（外側ウェッジ）の目的として正しいものはどれか。",choices:["外側関節面の負荷を軽減する","内側関節面の負荷を軽減する","膝関節の可動域を増大させる","下肢全体の筋力を強化する"],ans:1,exp:"外側ウェッジの足底板は、脛骨の内側傾斜により負荷が集中しやすい内側関節面の負荷を軽減することを目的とした補装具である。"},
+{id:"k19",cat:"第12回",q:"TKA術後のOT介入で重要視される関節可動域の目安として挙げられている屈曲角度はどれか。",choices:["屈曲70°以上","屈曲90°以上","屈曲110°以上","屈曲150°以上"],ans:2,exp:"TKA後は股関節術後ほど脱臼リスクは高くないが、術後炎症管理とROM回復（特に屈曲110°以上）が階段・和式動作の再獲得に向けて重要とされる。"},
+{id:"k20",cat:"第12回",q:"変形性膝関節症患者への椅子・便座の高さ調整に関する記述で正しいものはどれか。",choices:["座面が低いほど立ち上がり時の膝屈曲角は小さくなり負担が減る","座面が低いほど立ち上がり時の膝屈曲角が大きくなり負担が増す","座面の高さは膝への負担に影響しない","座面は常に低い方が良い"],ans:1,exp:"座面が低いほど立ち上がり時に膝をより深く屈曲させる必要があり、膝関節への負担が増すため、椅子・ベッド・便座の高さ調整が環境整備として重要である。"},
+{id:"x01",cat:"病態理解・横断的思考",q:"大腿骨頸部骨折で仮骨が形成されない理由として最も適切なものはどれか。",choices:["関節包外で骨膜が豊富にあるため","関節包内に骨膜を欠き、出血による血腫形成も少ないため","骨頭への血流が良好なため","海綿骨の血流が豊富なため"],ans:1,exp:"仮骨形成には骨膜からの血液供給と、出血による血腫の足場が必要となる。頸部骨折は関節包内に位置し骨膜を欠き、出血量も少ないため仮骨形成が起こりにくく骨癒合困難の一因となる。転子部骨折は関節包外で骨膜が存在し出血量も多いため仮骨が形成され骨癒合は良好である。"},
+{id:"x02",cat:"病態理解・横断的思考",q:"大腿骨頸部骨折と転子部骨折で「血行・転位の程度」と「治療方針」の関係について最も適切な説明はどれか。",choices:["血行が保たれ安定していればORIF、血行不良・転位が大きく不安定であるほど人工物置換や強固な固定法に近づくという考え方は両骨折で共通している","頸部骨折は常に人工骨頭、転子部骨折は常に骨接合術である","血行は転子部骨折の治療方針には関係しない","Garden分類とEvans分類は全く異なる治療ロジックに基づく"],ans:0,exp:"Garden分類（Stage進行で血流途絶→BHA/THA）もEvans分類（不安定型→髄内釘、整復不能な粉砕骨折ではさらに人工物も検討）も、骨折が安定し血行が保たれていればORIF系を選択し、不安定・血行不良になるほど人工物寄りの治療や力学的に強固な固定法を選ぶという共通の臨床ロジックを持つ。"},
+{id:"x03",cat:"病態理解・横断的思考",q:"Garden Stage III・IVで高齢者にBHAが選択される根拠と、Evans Group3・4で髄内釘が選択される根拠に共通する臨床判断はどれか。",choices:["いずれも患者の年齢のみで決定される","いずれも骨折の安定性・整復可能性を重視し、不安定であるほどより確実な固定・代替手段を選ぶ","いずれも骨膜の有無とは無関係である","いずれも血流とは無関係に決定される"],ans:1,exp:"頸部骨折では血流途絶・高度転位で骨頭の生存が見込めないためBHAを選択し、転子部骨折では整復不能・不安定性が高いほど力学的に強固な髄内釘が選ばれる。いずれも「不安定・修復困難であるほど、より確実な固定または置換法を選ぶ」という判断の流れが共通している。"},
+{id:"x04",cat:"病態理解・横断的思考",q:"変形性膝関節症で内側関節面に負荷が集中しやすい構造的理由はどれか。",choices:["大腿骨が外側に偏位しているため","脛骨の荷重面がもともと内側に傾く構造になっているため","膝蓋骨が外側に脱臼しやすいため","半月板が外側のみ存在するため"],ans:1,exp:"脛骨の荷重面はもともと内側に傾く構造であり、内側関節面に体重がかかりやすい。この構造的特徴に加齢による軟骨劣化や半月板損傷が加わることで内側型の変形性膝関節症が進行しやすくなる。"},
+{id:"x05",cat:"病態理解・横断的思考",q:"変形性膝関節症の治療がKL分類の進行に応じて保存療法から手術療法へ移行する基本的な考え方として正しいものはどれか。",choices:["KLグレードに関わらず症状の有無だけで決定する","軟骨・半月板損傷が限局的で初期（KL1〜2）なら関節鏡、進行し保存療法が無効でADL制限が著しい（KL3〜4）場合に骨切り術や人工関節置換術を検討する","KL4は必ず保存療法のみで対応する","KL1の時点で必ずTKAを行う"],ans:1,exp:"病期が進むほど軟骨・半月板の不可逆的な変性が進み保存療法の効果が乏しくなるため、初期は患者教育・運動療法・物理療法を中心とし、進行例・保存療法無効例で骨切り術（HTO）や人工関節置換術（UKA/TKA）を検討するという段階的な治療方針がとられる。"},
+{id:"x06",cat:"病態理解・横断的思考",q:"大腿骨近位部骨折術後とTKA術後で、局所の病態（脱臼リスクや関節可動域）以外に共通して特に注意すべき急性期のリスクはどれか。",choices:["骨頭壊死","不安定型骨折への進行","DVT・肺炎・せん妄など術後臥床に伴う全身合併症","関節裂隙の狭小化"],ans:2,exp:"股関節術後・膝関節術後いずれも局所の病態だけでなく、術後臥床に伴うDVT・肺炎・せん妄といった全身的な合併症リスクに共通して注意が必要であり、早期離床がいずれの場合も重要となる。"},
+{id:"x07",cat:"病態理解・横断的思考",q:"大腿骨転子部骨折で出血量が多くなる病態生理的理由として正しいものはどれか。",choices:["関節内骨折であり関節包内に出血がとどまるため","関節外骨折で骨膜が存在し、海綿骨の血流が豊富な部位であるため","骨頭への血流が完全に途絶するため","骨折部に仮骨が全く形成されないため"],ans:1,exp:"転子部は海綿骨が豊富で血流も豊富な部位であり、関節外骨折のため出血が関節包内にとどまらず周囲組織に広がる。そのため大腿部の腫脹や皮下出血を起こしやすく、頸部骨折とは対照的な病態を示す。"},
+{id:"x08",cat:"病態理解・横断的思考",q:"変形性膝関節症患者の心理社会的側面に対するOT介入の考え方として最も適切なものはどれか。",choices:["抑うつ傾向は疾患と無関係なので対応しない","疼痛の中でも意味のある作業に取り組む機会を作り、痛みで外出できない→孤立→うつという悪循環を断つ視点を持つ","心理的支援は医師のみが行うべきでOTは関与しない","ADL指導と心理的支援は両立できない"],ans:1,exp:"変形性膝関節症患者の約半数に抑うつ傾向がみられ、疼痛により活動が制限されることで孤立・うつに陥る悪循環がある。OTは低負荷・座位でできる趣味活動など意味のある作業を通じてこの悪循環を断つ視点を持つことが重要である。"},
+{id:"x09",cat:"病態理解・横断的思考",q:"「Fix and Treat」という考え方が示す大腿骨近位部骨折治療の方針として正しいものはどれか。",choices:["骨折部の固定のみを行い骨粗鬆症治療は後回しにする","骨折治療（Fix）と骨粗鬆症治療（Treat）を同時に行うことで二次骨折を予防する","骨粗鬆症治療を優先し骨折手術を延期する","リハビリテーションのみで骨折を治療する考え方"],ans:1,exp:"大腿骨近位部骨折患者は反対側骨折リスクが一般高齢者の3〜5倍であるため、骨折の手術治療（Fix）と骨粗鬆症治療（Treat）を同時に進める「Fix and Treat」の考え方が二次骨折予防の観点から重要である。"},
+{id:"x10",cat:"病態理解・横断的思考",q:"ORIFと人工骨頭・人工関節置換術の選択を分ける、骨折治療と変形性関節症治療に共通する最も本質的な臨床判断はどれか。",choices:["患者の希望のみで決定される","自己の骨・軟骨構造を温存して治癒・機能回復が見込めるか、それとも温存が困難で人工物による再建が必要かという判断","手術時間の長さのみで決定される","入院期間の長さのみで決定される"],ans:1,exp:"大腿骨近位部骨折（Garden/Evans分類に基づくORIF vs BHA/THA・髄内釘）も変形性関節症（KL分類に基づく骨切り術/UKA/TKA）も、根底には「自己の骨・軟骨構造を温存して治癒・機能回復が見込めるか、それとも温存困難で人工物再建が必要か」という共通の臨床判断ロジックがある。"}
+];
+
+const TOTAL = QUESTIONS.length;
+const QUESTIONS_BY_ID = {};
+QUESTIONS.forEach(q => { QUESTIONS_BY_ID[q.id] = q; });
+const CAT_CLASS = { "第11回": "cat-1", "第12回": "cat-2", "病態理解・横断的思考": "cat-3" };
+const OPT_LABELS = ['A', 'B', 'C', 'D'];
+
+/* =========================================================
+   学習履歴の永続化（localStorage、失敗時はメモリのみで動作）
+   stats[id] = { attempts: 解答回数, wrong: 誤答回数, lastCorrect: 直前の正誤 }
+   「苦手」= 直前の解答が不正解だった問題（正解すれば自動的に外れる）
+   ========================================================= */
+const STORAGE_KEY = "ot_quiz_stats_v1";
+let storageAvailable = true;
+let memoryStats = {};
+
+(function probeStorage() {
+  try {
+    const testKey = "__probe__";
+    window.localStorage.setItem(testKey, "1");
+    window.localStorage.removeItem(testKey);
+  } catch (e) {
+    storageAvailable = false;
+  }
+})();
+
+function loadStats() {
+  if (!storageAvailable) return memoryStats;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveStats(stats) {
+  if (!storageAvailable) { memoryStats = stats; return; }
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(stats));
+  } catch (e) { /* 保存失敗時は無視（学習自体は継続可能） */ }
+}
+
+function recordAnswer(stats, id, isCorrect) {
+  if (!stats[id]) stats[id] = { attempts: 0, wrong: 0, lastCorrect: null };
+  stats[id].attempts++;
+  if (!isCorrect) stats[id].wrong++;
+  stats[id].lastCorrect = isCorrect;
+}
+
+function getWeakIds(stats) {
+  return Object.keys(stats)
+    .filter(id => stats[id].lastCorrect === false && QUESTIONS_BY_ID[id])
+    .sort((a, b) => (stats[b].wrong - stats[a].wrong));
+}
+
+function getMasteredCount(stats) {
+  return Object.keys(stats).filter(id => stats[id].lastCorrect === true).length;
+}
+
+function getAttemptedCount(stats) {
+  return Object.keys(stats).filter(id => QUESTIONS_BY_ID[id]).length;
+}
+
+/* =========================================================
+   状態管理
+   ========================================================= */
+const state = {
+  screen: "home",   // home | quiz | result | weaklist
+  mode: "all",       // all | weak
+  activeIds: [],
+  current: 0,
+  answered: [],
+  score: 0
+};
+
+/* =========================================================
+   ホーム画面
+   ========================================================= */
+function renderHome() {
+  const app = document.getElementById('app');
+  const stats = loadStats();
+  const weakIds = getWeakIds(stats);
+  const attemptedCount = getAttemptedCount(stats);
+  const masteredCount = getMasteredCount(stats);
+  const hasHistory = attemptedCount > 0;
+
+  app.innerHTML = `
+    <p class="home-intro">${hasHistory
+      ? "前回までの学習履歴に基づいて、苦手な問題だけを抽出して復習できます。"
+      : "まずは全60問に挑戦してみましょう。間違えた問題は自動的に記録され、後から「苦手問題だけ」で復習できます。"}</p>
+    ${hasHistory ? `
+      <div class="home-stats">
+        <div class="stat-card">
+          <p class="s-cat">学習済み</p>
+          <p class="s-val">${attemptedCount}<span style="font-size:12px;font-weight:600;color:var(--ink-mute);"> / ${TOTAL}</span></p>
+        </div>
+        <div class="stat-card">
+          <p class="s-cat">習得済み</p>
+          <p class="s-val">${masteredCount}</p>
+        </div>
+        <div class="stat-card">
+          <p class="s-cat">苦手</p>
+          <p class="s-val weak-val">${weakIds.length}</p>
+        </div>
+      </div>
+    ` : ``}
+    <button class="mode-card" id="startAllBtn">
+      <span class="mc-icon-wrap">${ICONS.play}</span>
+      <span class="mc-text">
+        <p class="mc-title">全60問に挑戦する</p>
+        <p class="mc-sub">第11回・第12回・横断的思考をすべて出題</p>
+      </span>
+    </button>
+    <button class="mode-card is-gold" id="startWeakBtn" ${weakIds.length === 0 ? 'disabled' : ''}>
+      <span class="mc-icon-wrap">${ICONS.target}</span>
+      <span class="mc-text">
+        <p class="mc-title">苦手問題だけに挑戦する（${weakIds.length}問）</p>
+        <p class="mc-sub">${weakIds.length === 0 ? 'まずは全問に挑戦すると苦手問題が抽出されます' : '直前に間違えた問題だけを優先的に出題'}</p>
+      </span>
+    </button>
+    <div class="link-row">
+      <button class="link-btn" id="viewWeakListBtn" ${weakIds.length === 0 ? 'disabled' : ''}>${ICONS.list}苦手問題リストを見る</button>
+      <button class="link-btn danger" id="resetHistoryBtn" ${!hasHistory ? 'disabled' : ''}>${ICONS.trash}履歴をリセット</button>
+    </div>
+  `;
+
+  document.getElementById('startAllBtn').addEventListener('click', () => startQuiz('all'));
+  document.getElementById('startWeakBtn').addEventListener('click', () => { if (weakIds.length > 0) startQuiz('weak'); });
+  document.getElementById('viewWeakListBtn').addEventListener('click', () => { if (weakIds.length > 0) renderWeakList(); });
+  document.getElementById('resetHistoryBtn').addEventListener('click', () => {
+    if (!hasHistory) return;
+    if (window.confirm('学習履歴（解答回数・苦手問題の記録）をすべて削除します。よろしいですか？')) {
+      saveStats({});
+      renderHome();
+    }
+  });
+}
+
+/* =========================================================
+   苦手問題リスト画面
+   ========================================================= */
+function renderWeakList() {
+  const app = document.getElementById('app');
+  const stats = loadStats();
+  const weakIds = getWeakIds(stats);
+
+  app.innerHTML = `
+    <div class="wl-header">
+      <button class="back-btn" id="wlBackBtn">${ICONS.back}ホームに戻る</button>
+      <h2>苦手問題リスト（${weakIds.length}問）</h2>
+    </div>
+    <div class="review-list" style="padding:0;" id="wlList"></div>
+    <div class="action-row" style="padding:18px 0 0;">
+      <button class="btn btn-primary" id="wlStartBtn">この${weakIds.length}問で復習する</button>
+    </div>
+  `;
+
+  const listDiv = document.getElementById('wlList');
+  if (weakIds.length === 0) {
+    listDiv.innerHTML = `<p class="empty-note">苦手問題はありません。</p>`;
+  } else {
+    listDiv.innerHTML = weakIds.map((id, idx) => {
+      const q = QUESTIONS_BY_ID[id];
+      const s = stats[id];
+      const catClass = CAT_CLASS[q.cat] || "cat-1";
+      return `
+        <div class="review-item">
+          <p class="ri-cat">
+            <span class="catbadge ${catClass}" style="font-size:10px;padding:3px 9px;">${q.cat}</span>
+            <span class="ri-miss">誤答 ${s.wrong}回 / 解答 ${s.attempts}回</span>
+          </p>
+          <p class="ri-q">${q.q}</p>
+          <button class="ri-toggle" data-idx="${idx}">解説を見る ▾</button>
+          <p class="ri-ans" id="wlAns-${idx}" style="display:none;">正解: ${OPT_LABELS[q.ans]}. ${q.choices[q.ans]}</p>
+          <p class="ri-exp" id="wlExp-${idx}">${q.exp}</p>
+        </div>
+      `;
+    }).join('');
+
+    listDiv.querySelectorAll('.ri-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = btn.dataset.idx;
+        const exp = document.getElementById(`wlExp-${idx}`);
+        const ans = document.getElementById(`wlAns-${idx}`);
+        const isOpen = exp.classList.contains('is-open');
+        exp.classList.toggle('is-open');
+        ans.style.display = isOpen ? 'none' : 'block';
+        btn.textContent = isOpen ? '解説を見る ▾' : '解説を閉じる ▴';
+      });
+    });
+  }
+
+  document.getElementById('wlBackBtn').addEventListener('click', renderHome);
+  document.getElementById('wlStartBtn').addEventListener('click', () => {
+    if (weakIds.length > 0) startQuiz('weak');
+  });
+}
+
+/* =========================================================
+   出題セッションの開始
+   ========================================================= */
+function startQuiz(mode) {
+  const stats = loadStats();
+  state.mode = mode;
+  if (mode === 'weak') {
+    state.activeIds = getWeakIds(stats);
+  } else {
+    state.activeIds = QUESTIONS.map(q => q.id);
+  }
+  state.current = 0;
+  state.score = 0;
+  state.answered = new Array(state.activeIds.length).fill(null);
+  state.screen = "quiz";
+  renderQuestion();
+}
+
+/* =========================================================
+   出題画面
+   ========================================================= */
+function renderQuestion() {
+  const app = document.getElementById('app');
+  const sessionTotal = state.activeIds.length;
+  const qId = state.activeIds[state.current];
+  const item = QUESTIONS_BY_ID[qId];
+  const userAns = state.answered[state.current];
+  const answeredCount = state.answered.filter(a => a !== null).length;
+  const catClass = CAT_CLASS[item.cat] || "cat-1";
+  const isWeakMode = state.mode === 'weak';
+
+  app.innerHTML = `
+    <div class="wl-header" style="margin-bottom:14px;">
+      <button class="back-btn" id="quizHomeBtn">${ICONS.back}ホームに戻る</button>
+      ${isWeakMode ? `<span class="mode-flag">苦手問題モード</span>` : ``}
+    </div>
+    <div class="quiz-meta">
+      <span class="qnum">問題 ${state.current + 1} / ${sessionTotal}</span>
+      <span class="catbadge ${catClass}">${item.cat}</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill ${isWeakMode ? 'is-weak' : ''}" style="width:${(state.current / sessionTotal * 100)}%"></div>
+    </div>
+    <p class="question-text">${item.q}</p>
+    <div class="choices" id="choices"></div>
+    <div id="explanation"></div>
+    <div class="nav-row">
+      <button class="btn btn-ghost" id="prevBtn" ${state.current === 0 ? 'disabled' : ''}>← 前へ</button>
+      <span class="score-mini">正解 ${state.score} / ${answeredCount}</span>
+      <button class="btn btn-primary" id="nextBtn">${state.current === sessionTotal - 1 ? '結果を見る' : '次へ →'}</button>
+    </div>
+  `;
+
+  const choicesDiv = document.getElementById('choices');
+  item.choices.forEach((choiceText, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    if (userAns !== null) {
+      if (i === item.ans) btn.classList.add('choice-correct');
+      else if (i === userAns) btn.classList.add('choice-wrong');
+    }
+    btn.innerHTML = `<span class="opt-label">${OPT_LABELS[i]}</span><span class="opt-text">${choiceText}</span>`;
+    btn.disabled = userAns !== null;
+    btn.addEventListener('click', () => handleAnswer(i));
+    choicesDiv.appendChild(btn);
+  });
+
+  const expDiv = document.getElementById('explanation');
+  if (userAns !== null) {
+    const isCorrect = userAns === item.ans;
+    expDiv.innerHTML = `
+      <div class="explanation ${isCorrect ? '' : 'is-wrong'}">
+        <span class="result-tag ${isCorrect ? 'ok' : 'bad'}">${isCorrect ? '○ 正解' : '× 不正解'}</span>
+        <p class="exp-text">${item.exp}</p>
+      </div>
+    `;
+  }
+
+  document.getElementById('quizHomeBtn').addEventListener('click', () => {
+    const answeredCount2 = state.answered.filter(a => a !== null).length;
+    if (answeredCount2 > 0) {
+      if (window.confirm('現在の解答状況は保存されません。ホームに戻りますか？')) {
+        renderHome();
+      }
+    } else {
+      renderHome();
+    }
+  });
+  document.getElementById('prevBtn').addEventListener('click', goPrev);
+  document.getElementById('nextBtn').addEventListener('click', goNext);
+}
+
+function handleAnswer(choiceIndex) {
+  if (state.answered[state.current] !== null) return;
+  const qId = state.activeIds[state.current];
+  const item = QUESTIONS_BY_ID[qId];
+  state.answered[state.current] = choiceIndex;
+  if (choiceIndex === item.ans) state.score++;
+  renderQuestion();
+}
+
+function goPrev() {
+  if (state.current > 0) { state.current--; renderQuestion(); }
+}
+
+function goNext() {
+  if (state.answered[state.current] === null) return;
+  if (state.current === state.activeIds.length - 1) {
+    finishQuiz();
+  } else {
+    state.current++;
+    renderQuestion();
+  }
+}
+
+/* =========================================================
+   採点・履歴更新・結果画面
+   ========================================================= */
+function finishQuiz() {
+  const stats = loadStats();
+  state.activeIds.forEach((qId, i) => {
+    const item = QUESTIONS_BY_ID[qId];
+    const isCorrect = state.answered[i] === item.ans;
+    recordAnswer(stats, qId, isCorrect);
+  });
+  saveStats(stats);
+  state.screen = "result";
+  renderResult(stats);
+}
+
+function renderResult(statsAfter) {
+  const app = document.getElementById('app');
+  const sessionTotal = state.activeIds.length;
+  const pct = Math.round(state.score / sessionTotal * 100);
+
+  let msg;
+  if (pct >= 90) msg = '素晴らしい理解度です。';
+  else if (pct >= 70) msg = 'よく理解できています。';
+  else if (pct >= 50) msg = '基礎は押さえています。復習でさらに定着を。';
+  else msg = '苦手分野を中心に復習しましょう。';
+
+  const cats = ["第11回", "第12回", "病態理解・横断的思考"];
+  const stats = cats.map(cat => {
+    const idsInCat = state.activeIds.filter(id => QUESTIONS_BY_ID[id].cat === cat);
+    let scoreForCat = 0;
+    idsInCat.forEach(id => {
+      const i = state.activeIds.indexOf(id);
+      if (state.answered[i] === QUESTIONS_BY_ID[id].ans) scoreForCat++;
+    });
+    return { cat, total: idsInCat.length, score: scoreForCat };
+  }).filter(s => s.total > 0);
+
+  const newWeakCount = getWeakIds(statsAfter).length;
+
+  app.innerHTML = `
+    <div class="result-hero">
+      <p class="r-label">${state.mode === 'weak' ? '苦手問題 復習結果' : '最終結果'}</p>
+      <p class="r-score">${state.score}<span> / ${sessionTotal}</span></p>
+      <p class="r-msg">${msg}</p>
+    </div>
+    <div class="stat-grid">
+      ${stats.map(s => `
+        <div class="stat-card">
+          <p class="s-cat">${s.cat}</p>
+          <p class="s-val">${s.score} / ${s.total}</p>
+        </div>
+      `).join('')}
+    </div>
+    <div class="weak-note">
+      ${ICONS.target}
+      <span>現在の苦手問題数：${newWeakCount}問。ホーム画面からいつでも苦手問題だけの復習ができます。</span>
+    </div>
+    <div class="action-row">
+      <button class="btn btn-ghost" id="reviewBtn">今回間違えた問題を見る</button>
+      <button class="btn btn-primary" id="retryBtn">${ICONS.refresh}もう一度挑戦</button>
+    </div>
+    <div class="home-link-row">
+      <button class="link-btn" id="resultHomeBtn">${ICONS.back}ホームに戻る</button>
+    </div>
+    <div class="review-list" id="reviewList"></div>
+  `;
+
+  document.getElementById('retryBtn').addEventListener('click', () => startQuiz(state.mode));
+  document.getElementById('resultHomeBtn').addEventListener('click', renderHome);
+  document.getElementById('reviewBtn').addEventListener('click', toggleSessionReview);
+}
+
+function toggleSessionReview() {
+  const list = document.getElementById('reviewList');
+  if (list.dataset.open === '1') { list.innerHTML = ''; list.dataset.open = '0'; return; }
+  list.dataset.open = '1';
+
+  const wrongItems = state.activeIds
+    .map((qId, i) => ({ qId, i }))
+    .filter(o => state.answered[o.i] !== QUESTIONS_BY_ID[o.qId].ans);
+
+  if (wrongItems.length === 0) {
+    list.innerHTML = `<p class="empty-note">すべて正解でした。</p>`;
+    return;
+  }
+
+  list.innerHTML = wrongItems.map(o => {
+    const q = QUESTIONS_BY_ID[o.qId];
+    const catClass = CAT_CLASS[q.cat] || "cat-1";
+    return `
+      <div class="review-item">
+        <p class="ri-cat"><span class="catbadge ${catClass}" style="font-size:10px;padding:3px 9px;">${q.cat}</span></p>
+        <p class="ri-q">${q.q}</p>
+        <p class="ri-ans">正解: ${OPT_LABELS[q.ans]}. ${q.choices[q.ans]}</p>
+        <p class="ri-exp is-open">${q.exp}</p>
+      </div>
+    `;
+  }).join('');
+}
+
+/* =========================================================
+   起動
+   ========================================================= */
+renderHome();
+</script>
+</body>
+</html>
